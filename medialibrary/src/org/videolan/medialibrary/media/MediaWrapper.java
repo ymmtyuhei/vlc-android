@@ -139,6 +139,8 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
 
         if (mrl.charAt(0) == '/')
             mrl = "file://"+mrl;
+        if (mrl.toLowerCase().startsWith("vlc://"))
+            mrl = mrl.substring(6);
         mUri = Uri.parse(mrl);
         mId = id;
         mFilename = filename;
@@ -175,6 +177,8 @@ public class MediaWrapper extends MediaLibraryItem implements Parcelable {
         if (uri == null)
             throw new NullPointerException("uri was null");
 
+        if (uri.toString().toLowerCase().startsWith("vlc://"))
+            uri = Uri.parse(uri.toString().substring(6));
         mUri = uri;
         init(null);
     }
